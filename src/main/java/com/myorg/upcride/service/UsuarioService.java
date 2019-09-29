@@ -11,4 +11,5 @@ public interface UsuarioService{
     Usuario registrarUsuario(Usuario u) throws Exception;
     List<Usuario> visualizarUsuariosRegistrados() throws Exception;
     Integer iniciarSesion(String correoUPC, String contraseña) throws Exception;
+    Usuario obtenerPerfil(Integer id);
 }

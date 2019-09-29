@@ -26,17 +26,8 @@ public class SolicitudServiceImpl implements SolicitudService {
     	return true;
     }
 
-    public static Solicitud guardarSolicitud(Solicitud s,List<Solicitud> solicitudes){
-    	if(!validarSolicitud(solicitudes)||s.equals(null))return null;
-        Solicitud resultado = s;
-        try {
-            /*resultado = solicitudRepository.save(s);
-            viajeService.actualizarNumeroDePasajeros(s.getViaje().getId());*/
-        } catch(Exception ex){
-            throw ex;
-        }
-
-        return resultado;
+    public Solicitud guardarSolicitud(Solicitud s){
+    	return solicitudRepository.save(s);
     }
 
     @Override

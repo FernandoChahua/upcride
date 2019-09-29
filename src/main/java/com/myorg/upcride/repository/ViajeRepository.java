@@ -34,7 +34,7 @@ public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
     @Modifying
     @Query("UPDATE Viaje v SET v.numeroPasajeros = :numero WHERE v.id = :id")
     @Transactional
-    int actualizarNumeroDePasajeros(@Param("numero") int numPasajeros, @Param("id") Integer id) ;
+    int actualizarNumeroPasajeros(@Param("numero") int numPasajeros, @Param("id") Integer id) ;
 
 
     //Visualizar la lista de los pasajeros cuyas solicitudes fueron aceptadas

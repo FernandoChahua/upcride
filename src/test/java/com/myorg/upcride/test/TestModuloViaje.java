@@ -1,19 +1,16 @@
 package com.myorg.upcride.test;
 import com.myorg.upcride.model.*;
 import com.myorg.upcride.repository.*;
-import com.myorg.upcride.service.*;
 import com.myorg.upcride.service.Implementacion.*;
 
 import static org.junit.Assert.assertEquals;
 
-import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.*;
-import org.junit.runner.RunWith;
-import org.mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class TestModuloViaje {
@@ -33,7 +30,6 @@ public class TestModuloViaje {
 
 	private AutoServiceImpl autoService;
 
-	private ReseñaServiceImpl reseñaService;
 
 	private UsuarioServiceImpl usuarioService;
 
@@ -45,7 +41,6 @@ public class TestModuloViaje {
 		autoService = new AutoServiceImpl(autoRepository);
 		viajeService = new ViajeServiceImpl(viajeRepository,autoRepository,usuarioRepository,solicitudRepository);
 		solicitudService = new SolicitudServiceImpl(solicitudRepository,viajeService);
-		reseñaService = new ReseñaServiceImpl(reseñaRepository,viajeRepository);
 	}
 
 	@Test
@@ -58,10 +53,10 @@ public class TestModuloViaje {
 		double longitudViaje = -77.0867147;
 		boolean respuesta = false;
 		boolean esperado = true;
-		if(ViajeServiceImpl.computeDistance(latitudUser,longitudUser,latitudViaje,longitudViaje)<1.5) {
+		if(viajeService.computeDistance(latitudUser, longitudUser, latitudViaje, longitudViaje) < 1.5) {
 		 respuesta =true;	
 		}
-		System.out.println(ViajeServiceImpl.computeDistance(latitudUser,longitudUser,latitudViaje,longitudViaje));
+		System.out.println(viajeService.computeDistance(latitudUser, longitudUser, latitudViaje, longitudViaje));
 		assertEquals(respuesta,esperado);
 	}
 	
@@ -97,7 +92,7 @@ public class TestModuloViaje {
 		Solicitud res = new Solicitud();
 		res.setId(1);
 		boolean esperado = true;
-		res = SolicitudServiceImpl.guardarSolicitud(res,solicitudes);
+		res = solicitudService.guardarSolicitud(res);
 		
 		boolean resultado = false;
 		if(res!=null) {
@@ -106,6 +101,8 @@ public class TestModuloViaje {
 		
 		assertEquals(resultado,esperado);	
 	}
+	
+	
 	@Test
 	public void testValidarConductor() {
 		Usuario c = new Usuario();
@@ -118,22 +115,31 @@ public class TestModuloViaje {
 	@Test
 	public void testCumpleHoraPublicacion() {
 		LocalDateTime ldt = LocalDateTime.now();
-		Time t =new Time((ldt.getSecond()+ldt.getHour()*3600+ldt.getMinute()*60)*1000);
 		Viaje v = new Viaje();
-		v.setHoraPartida(t);
 		v.setConductor(null);
 		v.setDescripcion("Viaje de Monterrico a San Miguel");
 		v.setDestinoLatitud(-12.0768002);
 		v.setDestintoLongitud(-77.0843818);
-		v.setDia("Lunes");
-		v.setEstado("En proceso");
-		v.setHoraLlegada(new Time(3600*18)); // Setea la hora a las 6 de la tarde
+		v.setEstado("Programado");
+		v.setProgramadoPara(Timestamp.valueOf(LocalDateTime.now().plusHours(6))); // Setea la hora a 6 despues
 		v.setNumeroPasajeros(1);
 		v.setPuntoPartida("Monterrico");
 		v.setPuntoDestino("San Miguel");
 		
-		boolean resultado = viajeService.cumpleHora(v);
-		boolean esperado = false;
+		boolean resultado = viajeService.validarLimitesTiempo(v, "Publicar");
+		boolean esperado = true;
+		assertEquals(esperado,resultado);
+	}
+	
+	@Test
+	public void testPuedeCancelar() {
+		Viaje v = new Viaje();
+		v.setConductor(new Usuario());
+		v.setProgramadoPara(Timestamp.valueOf(LocalDateTime.now().plusMinutes(30)));
+		v.setNumeroPasajeros(1);
+		
+		boolean resultado = viajeService.validarLimitesTiempo(v, "Cancelar");
+		boolean esperado = true;
 		assertEquals(esperado,resultado);
 	}
 	

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="windows-1252">
+    <file url="file://$PROJECT_DIR$/src/main/java/com/myorg/upcride/controller/ResenaController.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/myorg/upcride/controller/UsuarioController.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/myorg/upcride/model/Resena.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/myorg/upcride/model/Usuario.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/myorg/upcride/repository/ResenaRepository.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/myorg/upcride/repository/UsuarioRepository.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/myorg/upcride/service/Implementacion/ResenaServiceImpl.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/myorg/upcride/service/Implementacion/UsuarioServiceImpl.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/myorg/upcride/service/ResenaService.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/myorg/upcride/service/UsuarioService.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/myorg/upcride/util/Distrito.java" charset="windows-1252" />
+  </component>
+</project>

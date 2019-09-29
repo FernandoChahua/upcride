@@ -14,23 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
-/*
+
     private UsuarioService usuarioService;
 
     @Autowired
     public UsuarioController(UsuarioService usuarioService){
         this.usuarioService = usuarioService;
-    }
-
-    @RequestMapping
-    public List<Usuario> visualizarUsuariosRegistrados() throws Exception
-    {
-        return usuarioService.visualizarUsuariosRegistrados();
-    }
-
-    @RequestMapping(path="/prueba", method = RequestMethod.GET)
-    public Usuario pasajeroPrueba() throws Exception {
-        return usuarioService.pasajeroPrueba();
     }
 
     @RequestMapping(path="/pasajero", method = RequestMethod.POST)
@@ -47,7 +36,7 @@ public class UsuarioController {
 
     @RequestMapping(path="/{id}", method = RequestMethod.GET)
     public Usuario verPerfil(@PathVariable Integer id) throws Exception{
-        return usuarioService.verPerfil(id);
+        return usuarioService.obtenerPerfil(id);
     }
 
 
@@ -55,7 +44,7 @@ public class UsuarioController {
     public Integer iniciarSesion(@PathVariable("correo") String correoUPC, @PathVariable("contraseña") String contraseña) throws Exception{
              return usuarioService.iniciarSesion(correoUPC, contraseña);
     }
-*/
+
 
 
 

@@ -55,4 +55,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Integer iniciarSesion(String correoUPC, String contraseña) throws Exception{
         return usuarioRepository.iniciarSesion(correoUPC, contraseña);
     }
+    
+    @Override 
+    public Usuario obtenerPerfil(Integer id) {
+    	return usuarioRepository.findById(id).orElse(null);
+    }
 }

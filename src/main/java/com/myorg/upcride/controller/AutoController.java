@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/autos")
 public class AutoController {
-/*
+
     private AutoService autoService;
 
     @Autowired
@@ -22,11 +22,11 @@ public class AutoController {
     @RequestMapping(method = RequestMethod.POST)
     public Auto guardarAuto(@RequestBody Auto a) throws Exception{
         return autoService.guardarAuto(a);
-        }
+    }
     @RequestMapping(method = RequestMethod.GET)
     public Auto buscarAutoPorConductor(Integer conductorId) throws Exception{
         return autoService.buscarAutoPorConductor(conductorId);
-    }*/
+    }
 
 }
 

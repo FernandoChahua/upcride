@@ -4,6 +4,7 @@ package com.myorg.upcride.controller;
 import com.myorg.upcride.model.Solicitud;
 import com.myorg.upcride.model.Usuario;
 import com.myorg.upcride.model.Viaje;
+import com.myorg.upcride.service.SolicitudService;
 import com.myorg.upcride.service.ViajeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,65 +19,54 @@ import java.util.List;
 @RestController
 @RequestMapping("/viajes")
 public class ViajeController {
-/*
+
     private ViajeService viajeService;
+    private SolicitudService solicitudService;
 
     @Autowired
-    public ViajeController(ViajeService viajeService){
+    public ViajeController(ViajeService viajeService, SolicitudService solicitudService){
         this.viajeService = viajeService;
-    }
-
-    @RequestMapping
-    public List<Viaje> visualizarViajesRegistrados() throws Exception
-    {
-        return viajeService.visualizarViajes();
+        this.solicitudService = solicitudService;
     }
 
 
-    @RequestMapping(path="/conductor/{conductorId}",method = RequestMethod.GET)
+    @GetMapping(path="/conductor/{conductorId}")
     public List<Viaje> listarViajesPorConductor(@PathVariable Integer conductorId) throws Exception{
       return viajeService.listarViajesPorConductor(conductorId);
     }
-    @RequestMapping( path="/publicar/{conductorId}",method = RequestMethod.POST)
+    @PostMapping( path="/publicar/{conductorId}")
     public Viaje publicarViaje(@RequestBody Viaje v, @PathVariable Integer conductorId) throws Exception {
 
         return viajeService.publicarViaje(v, conductorId);
     }
 
-    @RequestMapping(path="/{id}", method = RequestMethod.GET)
+    @GetMapping(path="/{id}")
     public Viaje buscarViajePorId(@PathVariable Integer id) throws Exception{
         return viajeService.buscarViaje(id);
     }
 
-    @RequestMapping(path="/{viajeId}/listaPasajeros")
-    public List<Usuario> listarPasajerosRegistrados(@PathVariable Integer viajeId) throws Exception{
-        return viajeService.listarPasajerosDelViaje(viajeId);
 
+    @RequestMapping(path="/conductor/{conductorId}", method= RequestMethod.GET)
+    public List<Solicitud> listarSolicitudesPorConductor(@PathVariable Integer conductorId) throws Exception{
+          return solicitudService.listarSolicitudesPorConductor(conductorId);
     }
-
-
-    @RequestMapping(path="/{viajeId}/solicitudesPendientes")
-    public List<Solicitud> listarSolicitudesPendientesDelViaje(@PathVariable Integer viajeId) throws Exception{
-        return viajeService.listarSolicitudesPendientesDelViaje(viajeId);
-    }
-
-    @RequestMapping(path="/solicitudesConfirmadas/{viajeId}", method=RequestMethod.GET)
-    public List<Solicitud> listarSolicitudesConfirmadasDelViaje(@PathVariable("viajeId") Integer viajeId) throws Exception{
-        return viajeService.listarSolicitudesConfirmadasDelViaje(viajeId);
-    }
-
-    
 
     @RequestMapping(path="update/{id}", method = RequestMethod.PUT)
     public int actualizarViaje(@RequestBody String estado, @PathVariable("id") Integer id) throws Exception{
         return viajeService.actualizarEstado(estado, id);
     }
+    
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public Solicitud solicitarViaje(@RequestBody Solicitud solicitud) throws Exception {
 
-    @RequestMapping(path="/{id}/{solicitudId}", method = RequestMethod.GET)
-    public List<Viaje> listarViajePorSolicitudYPasajero(@PathVariable("solicitudId")int solicitudId, @PathVariable("id") int pasajeroId)throws Exception{
-        return viajeService.listarPorSolicitudyPorPasajero(solicitudId, pasajeroId);
+        return solicitudService.guardarSolicitud(solicitud);
     }
 
-*/
+
+    @RequestMapping(path="update/{solicitudId}", method = RequestMethod.PUT)
+    public int actualizarConfirmacionConductor(@RequestBody String confirmacionConductor, @PathVariable("solicitudId") Integer solicitudId) throws Exception{
+        return solicitudService.actualizarConfirmacionConductor(confirmacionConductor, solicitudId);
+    }
 
 }

@@ -13,7 +13,6 @@ import com.myorg.upcride.service.ViajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +37,6 @@ public class ViajeServiceImpl implements ViajeService {
     @Override
     public Viaje publicarViaje(Viaje v, Integer conductorId)  {
         v.setEstado("Publicado");
-        v.setVisualizacionHabilitada(1);
         v.setConductor(usuarioRepository.findById(conductorId).get());
         v.setNumeroPasajeros(0);
         return viajeRepository.save(v);
@@ -62,25 +60,17 @@ public class ViajeServiceImpl implements ViajeService {
     @Override
     public int actualizarNumeroDePasajeros(Integer id) {
        int resultado = viajeRepository.calcularNumerodePasajerosDelViaje(id);
-       return viajeRepository.actualizarNumeroDePasajeros(resultado,id);
-    }
-
-    @Override
-    public List<Solicitud> listarSolicitudesPendientesDelViaje(Integer viajeId) {
-       return viajeRepository.listarSolicitudesPendientesDelViaje(viajeId);
-    }
-
-    @Override
-    public List<Solicitud> listarSolicitudesConfirmadasDelViaje(Integer viajeId) {
-        return viajeRepository.listarSolicitudesConfrimadasDelViaje(viajeId);
+       return viajeRepository.actualizarNumeroPasajeros(resultado, id);
     }
 
     @Override
     public List<Viaje> listarViajesPorConductor(Integer conductorId) {
         return viajeRepository.listarViajesPorConductor(conductorId);
     }
+    
     // Logica para Listar Viajes cercanos a mi
-    public static double computeDistance(double latA,double longA,double latB,double longB){
+    @Override
+    public double computeDistance(double latA,double longA,double latB,double longB){
         double R = 6137;
         double dLat = Math.toRadians(latB-latA);
         double dLong = Math.toRadians(longB-longA);
@@ -89,39 +79,56 @@ public class ViajeServiceImpl implements ViajeService {
         double d = R*c;
         return d;
     }
-    public static boolean cumpleHora(Viaje viaje)
-    {
-        boolean cerca=false;
-
-        LocalDateTime HoraActual = LocalDateTime.of(2019,12,25,5,20,10);
-
-
-        if ((viaje.getHoraPartida().getHours() - HoraActual.getHour() == 0  && viaje.getHoraPartida().getMinutes() - HoraActual.getMinute() < 0) ||
-            (viaje.getHoraPartida().getHours() - HoraActual.getHour() > 0 && viaje.getHoraPartida().getMinutes() - HoraActual.getMinute() >= 0))
-        {
-            cerca = true;
-        }
-        return cerca;
+    
+    
+    @Override
+    public boolean comprobarConductor(Usuario conductor) {
+    	boolean valido = true;
+    	
+    	if(conductor.equals(null))
+    		valido = false;
+    	else {
+    		if (conductor.getRol() != 'C')
+    			valido = false;
+    		else {
+    			if (conductor.getLicenciaConducir() == null)
+    				valido = false;
+    			else if (autoRepository.buscarAutoPorConductor(conductor.getId()).equals(null))
+    				valido = false;
+    		}
+    	}
+        return valido;
     }
 
-    public static boolean comprobarConductor(Usuario conductor)
-    {
-    	if(conductor.equals(null))return false;
-        boolean esConductor = false;
-
-        conductor.setRol('C');
-
-
-        if (conductor.getLicenciaConducir() != null)
-            esConductor = true;
-
-        return esConductor;
+    
+    public boolean validarLimitesTiempo(Viaje viaje, String razon) {
+    	boolean valido = true;
+    	
+    	LocalDateTime prog = viaje.getProgramadoPara().toLocalDateTime();
+    	LocalDateTime cmp = LocalDateTime.now(); 
+    	    	
+    	switch (razon) {
+    	case "Publicar":
+    		if (prog.isBefore(cmp.plusHours(1)) || prog.isAfter(cmp.plusHours(24)))
+    			valido = false;
+    	
+    	case "Cancelar":
+    		if (viaje.getProgramadoPara().toLocalDateTime().isAfter(cmp.plusHours(1)))
+    			valido = false;
+    		break;
+    	case "Activar":
+    		//TODO: activacion
+    		
+    		break;
+    	default:
+    		valido = false;
+    	}
+    	return valido;
     }
-
 
 	@Override
 	public Viaje cancelarViaje(Usuario conductor) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
     
