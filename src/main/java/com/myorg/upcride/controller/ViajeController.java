@@ -43,13 +43,6 @@ public class ViajeController {
         return viajeService.publicarViaje(v, conductorId);
     }
 
-    @RequestMapping(path="/solicitar/{viajeId}", method = RequestMethod.POST)
-    public Solicitud solictarViaje( @PathVariable Integer viajeId,  @RequestBody Solicitud s) throws Exception {
-
-        return viajeService.solicitarViaje(viajeId, s);
-    }
-
-
     @RequestMapping(path="/{id}", method = RequestMethod.GET)
     public Viaje buscarViajePorId(@PathVariable Integer id) throws Exception{
         return viajeService.buscarViaje(id);
@@ -73,24 +66,6 @@ public class ViajeController {
     }
 
     
-
-    @RequestMapping(path="/filtros", method = RequestMethod.GET)
-    public List<Viaje> filtrar(@RequestParam(value = "puntoPartida" , required = false) String puntoPartida,
-                               @RequestParam(value="puntoDestino", required = false) String puntoDestino,
-                               @RequestParam(value="horaPartida", required = false) Time horaPartida,
-                               @RequestParam(value="horaLlegada", required = false)  Time horaLlegada,
-                               @RequestParam(value="entrada_salida", defaultValue = "2") int entrada_salida,
-                               @RequestParam(value="fecha", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date fecha
-    ) throws Exception{
-
-
-        return viajeService.filtrar(puntoPartida,
-                puntoDestino,
-                horaPartida,
-                horaLlegada,
-                entrada_salida, fecha);
-
-    }
 
     @RequestMapping(path="update/{id}", method = RequestMethod.PUT)
     public int actualizarViaje(@RequestBody String estado, @PathVariable("id") Integer id) throws Exception{

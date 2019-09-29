@@ -14,8 +14,8 @@ import java.util.List;
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     @Query("SELECT u FROM Usuario u WHERE u.id = 1")
-    Usuario pasajeroPrueba() throws Exception;
+    Usuario pasajeroPrueba();
 
     @Query("SELECT u.id FROM Usuario u WHERE u.correoUPC = :correo AND u.contraseña = :contraseña")
-    Integer iniciarSesion(@Param("correo") String correoUPC, @Param("contraseña") String contraseña) throws Exception;
+    Integer iniciarSesion(@Param("correo") String correoUPC, @Param("contraseña") String contraseña);
 }

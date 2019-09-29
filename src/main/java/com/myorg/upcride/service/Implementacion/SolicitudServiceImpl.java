@@ -19,14 +19,22 @@ public class SolicitudServiceImpl implements SolicitudService {
         this.viajeService = viajeService;
     }
 
+    public static boolean validarSolicitud(List<Solicitud>s) {
+    	for(Solicitud i : s) {
+    		if(i.getConfirmacionConductor().equals("Confirmado"))return false;
+    	}
+    	return true;
+    }
 
     @Override
-    public Solicitud guardarSolicitud(Solicitud s) throws Exception {
+    public Solicitud guardarSolicitud(Solicitud s){
     	
-        Solicitud resultado;
+    	List<Solicitud> solicitudes = this.solicitudRepository.findAllByUsuarioId(s.getPasajero().getId());
+    	if(!validarSolicitud(solicitudes))return null;
+        Solicitud resultado = s;
         try {
-            resultado = solicitudRepository.save(s);
-            viajeService.actualizarNumeroDePasajeros(s.getViaje().getId());
+            /*resultado = solicitudRepository.save(s);
+            viajeService.actualizarNumeroDePasajeros(s.getViaje().getId());*/
         } catch(Exception ex){
             throw ex;
         }

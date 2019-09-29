@@ -36,7 +36,7 @@ public class ViajeServiceImpl implements ViajeService {
 
 
     @Override
-    public Viaje publicarViaje(Viaje v, Integer conductorId) throws Exception {
+    public Viaje publicarViaje(Viaje v, Integer conductorId)  {
         v.setEstado("Publicado");
         v.setVisualizacionHabilitada(1);
         v.setConductor(usuarioRepository.findById(conductorId).get());
@@ -46,44 +46,16 @@ public class ViajeServiceImpl implements ViajeService {
 
 
     @Override
-    public Viaje buscarViaje(Integer id) throws Exception {
+    public Viaje buscarViaje(Integer id) {
         return viajeRepository.findById(id).get();
     }
 
     @Override
-    public List<Viaje> visualizarViajes() throws Exception {
+    public List<Viaje> visualizarViajes()  {
         return viajeRepository.findAll();
     }
-
     @Override
-    public List<Viaje> filtrar(String puntoPartida, String puntoDestino, Time horaPartida, Time horaLlegada, int entradaSalida, Date fecha) throws Exception {
-
-        if (puntoPartida == null && puntoDestino == null && horaPartida == null && horaLlegada == null && entradaSalida == 2) {
-            return viajeRepository.listarPorFecha(fecha);
-        }
-        else if(puntoPartida == null && puntoDestino == null && horaPartida == null && entradaSalida == 2 && fecha == null){
-            return viajeRepository.listarPorHoraLlegada(horaLlegada);
-        }
-        else if (puntoPartida == null && puntoDestino == null && entradaSalida == 2 && fecha == null) {
-            return viajeRepository.listarPorHoraInicioYHoraFin(horaPartida, horaLlegada);
-        } else if (horaPartida == null && horaLlegada == null && entradaSalida == 2 && fecha == null) {
-            return viajeRepository.listarPorPuntoPartidaYPuntoDestino(puntoPartida, puntoDestino);
-        } else if (puntoPartida == null && puntoDestino == null && fecha == null && horaPartida == null && horaLlegada == null) {
-            return viajeRepository.listarPorEntradaOSalida(entradaSalida);
-
-        }
-       else if (entradaSalida == 2 && fecha == null) {
-            return viajeRepository.listarPorPuntoPartidaYPuntoDestinoYHoraInicioYHoraFin(puntoPartida, puntoDestino, horaPartida, horaLlegada);
-        } else if (entradaSalida == 2) {
-
-            return viajeRepository.listarPorPuntoPartidaYPuntoDestinoYHoraInicioYHoraFinYFecha( horaPartida, horaLlegada, puntoPartida, puntoDestino, fecha);
-        } else {
-            return viajeRepository.listarPorTodosLosFiltros(horaPartida, horaLlegada, puntoPartida, puntoDestino, entradaSalida, fecha);
-
-        }
-    }
-    @Override
-    public int actualizarEstado(String estado, int id) throws Exception{
+    public int actualizarEstado(String estado, int id) {
         return viajeRepository.actualizarEstado(estado, id);
     }
     @Override
@@ -92,47 +64,28 @@ public class ViajeServiceImpl implements ViajeService {
     }
 
     @Override
-    public int actualizarNumeroDePasajeros(Integer id) throws Exception{
+    public int actualizarNumeroDePasajeros(Integer id) {
        int resultado = viajeRepository.calcularNumerodePasajerosDelViaje(id);
        return viajeRepository.actualizarNumeroDePasajeros(resultado,id);
     }
 
     @Override
-    public List<Usuario> listarPasajerosDelViaje(Integer viajeId) throws Exception{
+    public List<Usuario> listarPasajerosDelViaje(Integer viajeId) {
         return viajeRepository.listarPasajerosDelViaje(viajeId);
     }
 
     @Override
-    public List<Solicitud> listarSolicitudesPendientesDelViaje(Integer viajeId) throws Exception{
+    public List<Solicitud> listarSolicitudesPendientesDelViaje(Integer viajeId) {
        return viajeRepository.listarSolicitudesPendientesDelViaje(viajeId);
     }
 
     @Override
-    public List<Solicitud> listarSolicitudesConfirmadasDelViaje(Integer viajeId) throws Exception{
+    public List<Solicitud> listarSolicitudesConfirmadasDelViaje(Integer viajeId) {
         return viajeRepository.listarSolicitudesConfrimadasDelViaje(viajeId);
     }
 
     @Override
-    public Solicitud solicitarViaje(Integer viajeId, Solicitud s) throws Exception {
-        Viaje objViaje = viajeRepository.findById(viajeId).get();
-        s.setViaje(objViaje);
-        int pasajerosRegistrados = objViaje.getNumeroPasajeros() + 1;
-        Solicitud resultado = new Solicitud();
-        if (pasajerosRegistrados <= objViaje.getLimitePasajeros()) {
-        try {
-               resultado = solicitudRepository.save(s);
-               viajeRepository.actualizarNumeroDePasajeros(pasajerosRegistrados, objViaje.getId());
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-        }
-        return resultado;
-    }
-
-    @Override
-    public List<Viaje> listarViajesPorConductor(Integer conductorId) throws Exception{
+    public List<Viaje> listarViajesPorConductor(Integer conductorId) {
         return viajeRepository.listarViajesPorConductor(conductorId);
     }
     // Logica para Listar Viajes cercanos a mi
@@ -145,6 +98,7 @@ public class ViajeServiceImpl implements ViajeService {
         double d = R*c;
         return d;
     }
+
     
 
 
