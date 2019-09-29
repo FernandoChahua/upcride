@@ -58,20 +58,11 @@ public class ViajeServiceImpl implements ViajeService {
     public int actualizarEstado(String estado, int id) {
         return viajeRepository.actualizarEstado(estado, id);
     }
-    @Override
-    public List<Viaje> listarPorSolicitudyPorPasajero(int solicitudId, int pasajeroId) throws Exception{
-        return viajeRepository.listarPorSolicitudyPorPasajero(solicitudId, pasajeroId);
-    }
 
     @Override
     public int actualizarNumeroDePasajeros(Integer id) {
        int resultado = viajeRepository.calcularNumerodePasajerosDelViaje(id);
        return viajeRepository.actualizarNumeroDePasajeros(resultado,id);
-    }
-
-    @Override
-    public List<Usuario> listarPasajerosDelViaje(Integer viajeId) {
-        return viajeRepository.listarPasajerosDelViaje(viajeId);
     }
 
     @Override
@@ -125,6 +116,13 @@ public class ViajeServiceImpl implements ViajeService {
 
         return esConductor;
     }
+
+
+	@Override
+	public Viaje cancelarViaje(Usuario conductor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 
 
