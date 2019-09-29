@@ -17,16 +17,13 @@ public class Transaccion implements Serializable {
 
 
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transaccion_id")
     private Integer id;
-
     @ManyToOne
     @JoinColumn(name = "pasajero_id")
     private Usuario pasajero;
-
     @ManyToOne
     @JoinColumn(name = "viaje_id")
     private Viaje viaje;

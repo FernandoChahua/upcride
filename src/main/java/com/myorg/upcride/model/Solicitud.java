@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 import java.io.Serializable;
 import java.sql.Date;
 import javax.persistence.Column;
@@ -40,7 +41,7 @@ public class Solicitud implements Serializable {
     @ManyToOne
     @JoinColumn(name = "viaje_id")
     private Viaje viaje;
-
+  
     @Column(name = "mensaje", length = 120, nullable = true)
     private String mensaje;
 

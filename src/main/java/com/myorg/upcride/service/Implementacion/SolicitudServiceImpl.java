@@ -22,6 +22,7 @@ public class SolicitudServiceImpl implements SolicitudService {
 
     @Override
     public Solicitud guardarSolicitud(Solicitud s) throws Exception {
+    	
         Solicitud resultado;
         try {
             resultado = solicitudRepository.save(s);

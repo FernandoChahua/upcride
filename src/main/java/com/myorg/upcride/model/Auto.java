@@ -10,13 +10,13 @@ import javax.persistence.*;
 
 
 @Entity
-
 @Table(name = "auto")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Auto implements Serializable{
 
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "auto_id")
