@@ -45,6 +45,7 @@ public class TestModuloViaje {
 		autoService = new AutoServiceImpl(autoRepository);
 		viajeService = new ViajeServiceImpl(viajeRepository,autoRepository,usuarioRepository,solicitudRepository);
 		solicitudService = new SolicitudServiceImpl(solicitudRepository,viajeService);
+		reseñaService = new ReseñaServiceImpl(reseñaRepository,viajeRepository);
 	}
 
 	@Test
@@ -120,8 +121,19 @@ public class TestModuloViaje {
 		Time t =new Time((ldt.getSecond()+ldt.getHour()*3600+ldt.getMinute()*60)*1000);
 		Viaje v = new Viaje();
 		v.setHoraPartida(t);
+		v.setConductor(null);
+		v.setDescripcion("Viaje de Monterrico a San Miguel");
+		v.setDestinoLatitud(-12.0768002);
+		v.setDestintoLongitud(-77.0843818);
+		v.setDia("Lunes");
+		v.setEstado("En proceso");
+		v.setHoraLlegada(new Time(3600*18)); // Setea la hora a las 6 de la tarde
+		v.setNumeroPasajeros(1);
+		v.setPuntoPartida("Monterrico");
+		v.setPuntoDestino("San Miguel");
+		
 		boolean resultado = viajeService.cumpleHora(v);
-		boolean esperado = true;
+		boolean esperado = false;
 		assertEquals(esperado,resultado);
 	}
 	

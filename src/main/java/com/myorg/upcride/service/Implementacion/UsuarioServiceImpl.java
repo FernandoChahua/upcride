@@ -28,8 +28,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         try{
             for(int i = 0; i < lista.size(); i++){
             if(lista.get(i).getCodigo()== u.getCodigo() ||
-             lista.get(i).getNombres().equals( u.getNombres()) ||
-             lista.get(i).getApellidos().equals( u.getApellidos()) ){
+             (lista.get(i).getNombres().equals( u.getNombres()) &&
+             lista.get(i).getApellidos().equals( u.getApellidos())) ){
                 c = 1;
             }
 
@@ -47,18 +47,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario verPerfil(Integer id) throws Exception {
-        return usuarioRepository.findById(id).get();
-    }
-
-    @Override
     public List<Usuario> visualizarUsuariosRegistrados() throws Exception {
         return usuarioRepository.findAll();
-    }
-
-    @Override
-    public Usuario pasajeroPrueba() throws Exception{
-        return usuarioRepository.pasajeroPrueba();
     }
 
     @Override

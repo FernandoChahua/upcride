@@ -26,8 +26,8 @@ public class SolicitudServiceImpl implements SolicitudService {
     	return true;
     }
 
-    public static Solicitud guardarSolicitud(Solicitud s,List<Solicitud> solicitudes){ 
-    	if(!validarSolicitud(solicitudes))return null;
+    public static Solicitud guardarSolicitud(Solicitud s,List<Solicitud> solicitudes){
+    	if(!validarSolicitud(solicitudes)||s.equals(null))return null;
         Solicitud resultado = s;
         try {
             /*resultado = solicitudRepository.save(s);

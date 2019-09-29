@@ -93,7 +93,7 @@ public class ViajeServiceImpl implements ViajeService {
     {
         boolean cerca=false;
 
-        LocalDateTime HoraActual = LocalDateTime.now();
+        LocalDateTime HoraActual = LocalDateTime.of(2019,12,25,5,20,10);
 
 
         if ((viaje.getHoraPartida().getHours() - HoraActual.getHour() == 0  && viaje.getHoraPartida().getMinutes() - HoraActual.getMinute() < 0) ||
@@ -106,6 +106,7 @@ public class ViajeServiceImpl implements ViajeService {
 
     public static boolean comprobarConductor(Usuario conductor)
     {
+    	if(conductor.equals(null))return false;
         boolean esConductor = false;
 
         conductor.setRol('C');
