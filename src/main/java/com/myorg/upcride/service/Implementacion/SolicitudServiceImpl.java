@@ -40,11 +40,6 @@ public class SolicitudServiceImpl implements SolicitudService {
     }
 
     @Override
-    public List<Solicitud> listarSolicitudes() throws Exception{
-        return solicitudRepository.findAll();
-    }
-
-    @Override
     public List<Solicitud> listarSolicitudesPorConductor(Integer conductorId) throws Exception{
         return solicitudRepository.listarSolicitudesPorConductor(conductorId);
     }
@@ -54,10 +49,5 @@ public class SolicitudServiceImpl implements SolicitudService {
         return solicitudRepository.actualizarConfirmacionConductor(confirmacionConductor, solicitudId);
     }
 
-	@Override
-	public Solicitud guardarSolicitud(Solicitud s) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

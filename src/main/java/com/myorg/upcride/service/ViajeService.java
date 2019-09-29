@@ -15,10 +15,10 @@ public interface ViajeService {
     Viaje buscarViaje(Integer id) throws Exception;
     List<Viaje> visualizarViajes() throws Exception;
     int actualizarEstado(String estado, int id) throws Exception;
-    List<Viaje> listarPorSolicitudyPorPasajero(int solicitudId, int pasajeroId) throws Exception;
     int actualizarNumeroDePasajeros(Integer id) throws Exception;
-    List<Usuario> listarPasajerosDelViaje(Integer viajeId) throws Exception;
     List<Solicitud> listarSolicitudesPendientesDelViaje(Integer viajeId) throws Exception;
     List<Solicitud> listarSolicitudesConfirmadasDelViaje(Integer viajeId) throws Exception;
     List<Viaje> listarViajesPorConductor(Integer conductor) throws Exception;
+    Viaje cancelarViaje(Usuario conductor); 
+    
 }

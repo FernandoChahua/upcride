@@ -6,6 +6,8 @@ import com.myorg.upcride.service.Implementacion.*;
 
 import static org.junit.Assert.assertEquals;
 
+import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,6 +104,25 @@ public class TestModuloViaje {
 		}
 		
 		assertEquals(resultado,esperado);	
+	}
+	@Test
+	public void testValidarConductor() {
+		Usuario c = new Usuario();
+		c.setRol('C');
+		c.setLicenciaConducir("ABC-023");
+		boolean resultado = viajeService.comprobarConductor(c);
+		boolean esperado = true;
+		assertEquals(esperado,resultado);
+	}
+	@Test
+	public void testCumpleHoraPublicacion() {
+		LocalDateTime ldt = LocalDateTime.now();
+		Time t =new Time((ldt.getSecond()+ldt.getHour()*3600+ldt.getMinute()*60)*1000);
+		Viaje v = new Viaje();
+		v.setHoraPartida(t);
+		boolean resultado = viajeService.cumpleHora(v);
+		boolean esperado = true;
+		assertEquals(esperado,resultado);
 	}
 	
 	
