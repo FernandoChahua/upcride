@@ -9,7 +9,6 @@ import com.myorg.upcride.service.Implementacion.ViajeServiceImpl;
 
 public class TestModuloViaje {
 
-	public 
 	@Test
 	public void testDist() {
 		//Direccion Plaza San Miguel
@@ -23,7 +22,7 @@ public class TestModuloViaje {
 		if(ViajeServiceImpl.computeDistance(latitudUser,longitudUser,latitudViaje,longitudViaje)<1.5) {
 		 respuesta =true;	
 		}
-		//System.out.println(ViajeServiceImpl.computeDistance(latitudUser,longitudUser,latitudViaje,longitudViaje));
+		System.out.println(ViajeServiceImpl.computeDistance(latitudUser,longitudUser,latitudViaje,longitudViaje));
 		assertEquals(respuesta,esperado);
 	}
 
