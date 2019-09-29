@@ -62,7 +62,7 @@ public class TestModuloViaje {
 		boolean esperado = false;
 		assertEquals(resultado,esperado);
 	}
-	/*
+	
 	@Test
 	public void testGuardarSolicitud()
 	{
@@ -73,18 +73,20 @@ public class TestModuloViaje {
 		
 		
 		List<Solicitud> solicitudes = new ArrayList<Solicitud>();
-		solicitudes.add(s);solicitudes.add(n);solicitudes.add(n);solicitudes.add(n);
+		solicitudes.add(n);solicitudes.add(n);solicitudes.add(n);solicitudes.add(n);
 		
-		solicitudes.add(s);solicitudes.add(n);solicitudes.add(n);solicitudes.add(n);
-		when(solicitudRepository.findAllByUsuarioId(1)).thenReturn(solicitudes);
-		Solicitud resultado = new Solicitud();
-		resultado.setId(1);
-		Solicitud esperado = resultado;
-		resultado = solicitudService.guardarSolicitud(resultado);
+		Solicitud res = new Solicitud();
+		res.setId(1);
+		boolean esperado = true;
+		res = SolicitudServiceImpl.guardarSolicitud(res,solicitudes);
 		
+		boolean resultado = false;
+		if(res!=null) {
+			resultado = true;
+		}
 		
 		assertEquals(resultado,esperado);
 		
-	}*/
+	}
 
 }

@@ -26,10 +26,7 @@ public class SolicitudServiceImpl implements SolicitudService {
     	return true;
     }
 
-    @Override
-    public Solicitud guardarSolicitud(Solicitud s){
-    	
-    	List<Solicitud> solicitudes = this.solicitudRepository.findAllByUsuarioId(s.getPasajero().getId());
+    public static Solicitud guardarSolicitud(Solicitud s,List<Solicitud> solicitudes){ 
     	if(!validarSolicitud(solicitudes))return null;
         Solicitud resultado = s;
         try {
@@ -56,5 +53,11 @@ public class SolicitudServiceImpl implements SolicitudService {
     public int actualizarConfirmacionConductor(String confirmacionConductor, Integer solicitudId) throws Exception{
         return solicitudRepository.actualizarConfirmacionConductor(confirmacionConductor, solicitudId);
     }
+
+	@Override
+	public Solicitud guardarSolicitud(Solicitud s) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

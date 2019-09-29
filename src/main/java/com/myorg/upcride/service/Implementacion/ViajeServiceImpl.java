@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
-
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -98,7 +98,35 @@ public class ViajeServiceImpl implements ViajeService {
         double d = R*c;
         return d;
     }
+    public static boolean cumpleHora(Viaje viaje)
+    {
+        boolean cerca=false;
 
+
+
+        LocalDateTime HoraActual = LocalDateTime.of(1999, 1, 15, 3, 57, 32, 11);
+
+
+        if ((viaje.getHoraPartida().getHours() - HoraActual.getHour() == 0  && viaje.getHoraPartida().getMinutes() - HoraActual.getMinute() < 0) ||
+            (viaje.getHoraPartida().getHours() - HoraActual.getHour() > 0 && viaje.getHoraPartida().getMinutes() - HoraActual.getMinute() >= 0))
+        {
+            cerca = true;
+        }
+        return cerca;
+    }
+
+    public static boolean ComprobaarConductor(Usuario conductor)
+    {
+        boolean esConductor = false;
+
+        conductor.setRol('C');
+
+
+        if (conductor.getLicenciaConducir() != null)
+            esConductor = true;
+
+        return esConductor;
+    }
     
 
 
