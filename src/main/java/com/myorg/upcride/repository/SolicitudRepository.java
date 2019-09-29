@@ -20,5 +20,5 @@ public interface SolicitudRepository extends JpaRepository<Solicitud, Integer> {
     @Transactional
     public int actualizarConfirmacionConductor(@Param("confirmacion") String confirmacionConductor, @Param("id") Integer solicitudId);
     
-    public List<Solicitud> findAllByUsuarioId(int id);
+    public List<Solicitud> findAllByPasajeroId(int id);
 }

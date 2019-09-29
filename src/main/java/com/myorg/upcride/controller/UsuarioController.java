@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
-
+/*
     private UsuarioService usuarioService;
 
     @Autowired
@@ -55,7 +55,7 @@ public class UsuarioController {
     public Integer iniciarSesion(@PathVariable("correo") String correoUPC, @PathVariable("contraseña") String contraseña) throws Exception{
              return usuarioService.iniciarSesion(correoUPC, contraseña);
     }
-
+*/
 
 
 

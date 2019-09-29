@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/autos")
 public class AutoController {
-
+/*
     private AutoService autoService;
 
     @Autowired
@@ -26,7 +26,7 @@ public class AutoController {
     @RequestMapping(method = RequestMethod.GET)
     public Auto buscarAutoPorConductor(Integer conductorId) throws Exception{
         return autoService.buscarAutoPorConductor(conductorId);
-    }
+    }*/
 
 }
 

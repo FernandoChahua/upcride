@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/viajes")
 public class ViajeController {
-
+/*
     private ViajeService viajeService;
 
     @Autowired
@@ -77,6 +77,6 @@ public class ViajeController {
         return viajeService.listarPorSolicitudyPorPasajero(solicitudId, pasajeroId);
     }
 
-
+*/
 
 }

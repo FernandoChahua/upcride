@@ -12,22 +12,38 @@ import java.util.List;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class TestModuloViaje {
 
-	
-	@InjectMocks
+	@Autowired
+	private AutoRepository autoRepository;
+	@Autowired
+	private ReseñaRepository reseñaRepository;
+	@Autowired
+	private SolicitudRepository solicitudRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private ViajeRepository viajeRepository;
+
 	private SolicitudServiceImpl solicitudService;
-	@InjectMocks
+
 	private AutoServiceImpl autoService;
-	@InjectMocks
+
 	private ReseñaServiceImpl reseñaService;
-	@InjectMocks
+
 	private UsuarioServiceImpl usuarioService;
-	@InjectMocks
+
 	private ViajeServiceImpl viajeService;
 	
-	
+	@Before
+	public void init() {
+		usuarioService = new UsuarioServiceImpl(usuarioRepository);
+		autoService = new AutoServiceImpl(autoRepository);
+		viajeService = new ViajeServiceImpl(viajeRepository,autoRepository,usuarioRepository,solicitudRepository);
+		solicitudService = new SolicitudServiceImpl(solicitudRepository,viajeService);
+	}
 
 	@Test
 	public void testDist() {
@@ -85,8 +101,9 @@ public class TestModuloViaje {
 			resultado = true;
 		}
 		
-		assertEquals(resultado,esperado);
-		
+		assertEquals(resultado,esperado);	
 	}
+	
+	
 
 }

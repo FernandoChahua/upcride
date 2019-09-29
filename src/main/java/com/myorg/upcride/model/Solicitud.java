@@ -35,7 +35,7 @@ public class Solicitud implements Serializable {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "pasajero_id")
+    @JoinColumn(name = "usuario_id")
     private Usuario pasajero;
 
     @ManyToOne

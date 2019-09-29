@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/reseñas")
 public class ReseñaController {
-
+/*
     private ReseñaService reseñaService;
 
     @Autowired
@@ -31,7 +31,7 @@ public class ReseñaController {
 
     @RequestMapping(path="/{conductorId}", method = RequestMethod.GET)
     public List<Reseña> listarResñasPorConductor(@PathVariable Integer conductorId) throws Exception{
-        return reseñaService.listarReseñasPorConductor(conductorId);
-    }
+       return reseñaService.listarReseñasPorConductor(conductorId);
+    }*/
 
 }

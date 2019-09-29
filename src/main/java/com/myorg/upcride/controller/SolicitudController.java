@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/solicitudes")
 public class SolicitudController {
-
+/*
     private SolicitudService solicitudService;
 
     @Autowired
@@ -43,7 +43,7 @@ public class SolicitudController {
     public int actualizarConfirmacionConductor(@RequestBody String confirmacionConductor, @PathVariable("solicitudId") Integer solicitudId) throws Exception{
         return solicitudService.actualizarConfirmacionConductor(confirmacionConductor, solicitudId);
     }
-
+*/
 
 
 }
